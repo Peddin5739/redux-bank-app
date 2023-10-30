@@ -1,5 +1,8 @@
 import React from "react";
 import styles from "./stylesfolder/dashboard.module.css";
+import leafImg from "../assets/leafimg.png";
+import Imagechange from "./imagechange";
+import Login from "./Login";
 
 export default function Dashboard() {
   return (
@@ -15,10 +18,18 @@ export default function Dashboard() {
           <a href="#">Customer Service</a>
         </div>
       </nav>
+      <div className={styles.logo}>
+        <h4>FINANCE WITH </h4>
+        <img src={leafImg} alt="Leaf Logo" />
+      </div>
 
       <content className={styles["content"]}>
-        <div className="immage"></div>
-        <div className="login"></div>
+        <div className={styles["image"]}>
+          <Imagechange />
+        </div>
+        <div className={styles["login"]}>
+          <Login />
+        </div>
       </content>
     </div>
   );
