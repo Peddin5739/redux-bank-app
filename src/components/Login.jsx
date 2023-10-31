@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./stylesfolder/Login.module.css";
 import { useSelector,useDispatch } from "react-redux";
-import { loginRequest,loginSuccess, loginFailure } from "../actions/loginActions";
+import { loginRequest,clickSignin } from "../actions/loginActions";
 export default function Login() {
   const authenticateuser=useSelector(state=>state.auth)
   const dispatch=useDispatch();
@@ -11,9 +11,12 @@ export default function Login() {
   const HandelClick = () => {
     dispatch(loginRequest(userName,password));
   };
+  const setsignup=()=>{
+    dispatch(clickSignin());
+  }
 
-  console.log(authenticateuser);
   
+
   return (
 
     <div className={styles.LoginContainer}>
@@ -40,7 +43,7 @@ export default function Login() {
         <button type="submit" onClick={HandelClick }>Login</button>
         <div className={styles.anchor}>
           <a src="#">Forgot username/password? </a> <br></br>
-          <a src="#"> Not enrolled? Sign up now.</a>
+          <a src="#" onClick={setsignup}> Not enrolled? Sign up now.</a>
         </div>
      
     </div>

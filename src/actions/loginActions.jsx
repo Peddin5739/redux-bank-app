@@ -15,3 +15,7 @@ export const loginSuccess=(user)=>{
 export const loginFailure=(error)=>{
     return {type:'LOGIN_FAILURE',payload:error}
 }
+
+export const clickSignin=()=>{
+    return {type:'SIGNIN'}
+}

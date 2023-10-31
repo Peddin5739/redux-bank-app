@@ -3,8 +3,15 @@ import styles from "./stylesfolder/dashboard.module.css";
 import leafImg from "../assets/leafimg.png";
 import Imagechange from "./imagechange";
 import Login from "./Login";
+import SignupForm from "./signup";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function Dashboard() {
+  const checkSigninClick=useSelector(state=>state.auth)
+ 
+  const signin=checkSigninClick.signin;
+  console.log(signin);
   return (
     <div className={styles["dashboardContainer"]}>
       <nav className={styles["navbar"]}>
@@ -22,15 +29,19 @@ export default function Dashboard() {
         <h4>FINANCE WITH </h4>
         <img src={leafImg} alt="Leaf Logo" />
       </div>
+      { /* content part */ }
 
-      <div className={styles["content"]}>
+      { !signin && (<div className={styles["content"]}>
         <div className={styles["image"]}>
           <Imagechange />
         </div>
         <div className={styles["login"]}>
           <Login />
         </div>
-      </div>
+       
+      </div>) }
+
+      { signin && <SignupForm />}
     </div>
   );
 }
