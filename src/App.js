@@ -1,8 +1,7 @@
 import Dashboard from "./components/dashboard";
 import "./App.css";
 import { Provider } from 'react-redux';
-import ConfigureStore from "./store/configureStore";
-const store = ConfigureStore();
+import store from "./store/configureStore";
 
 function App() {
   return (

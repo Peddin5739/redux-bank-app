@@ -23,14 +23,14 @@ export default function Dashboard() {
         <img src={leafImg} alt="Leaf Logo" />
       </div>
 
-      <content className={styles["content"]}>
+      <div className={styles["content"]}>
         <div className={styles["image"]}>
           <Imagechange />
         </div>
         <div className={styles["login"]}>
           <Login />
         </div>
-      </content>
+      </div>
     </div>
   );
 }
