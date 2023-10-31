@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styles from "./stylesfolder/Login.module.css";
-
+import { useSelector,useDispatch } from "react-redux";
+import { loginRequest,loginSuccess, loginFailure } from "../actions/loginActions";
 export default function Login() {
+  const authenticateuser=useSelector(state=>state.auth)
+  console.log(authenticateuser)
+  
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
   const handelClick = () => {
