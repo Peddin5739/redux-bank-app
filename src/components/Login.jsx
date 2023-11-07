@@ -11,9 +11,7 @@ export default function Login() {
   const HandelClick = () => {
     dispatch(loginRequest(userName,password));
   };
-  const setsignup=()=>{
-    dispatch(clickSignin());
-  }
+  
 
   
 
@@ -43,7 +41,7 @@ export default function Login() {
         <button type="submit" onClick={HandelClick }>Login</button>
         <div className={styles.anchor}>
           <a src="#">Forgot username/password? </a> <br></br>
-          <a src="#" onClick={setsignup}> Not enrolled? Sign up now.</a>
+          <a src="#"> Not enrolled? Sign up now.</a>
         </div>
      
     </div>

@@ -3,20 +3,22 @@ import styles from "./stylesfolder/dashboard.module.css";
 import leafImg from "../assets/leafimg.png";
 import Imagechange from "./imagechange";
 import Login from "./Login";
-import SignupForm from "./signup";
+import CallHandler from "./callHandler";
+
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
 export default function Dashboard() {
-  const checkSigninClick=useSelector(state=>state.auth)
- 
-  const signin=checkSigninClick.signin;
-  console.log(signin);
+  // using the login reducer getting the user
+  const checkUser=useSelector(state=>state.auth)
+  // fetching the user  from the authReducer state
+  const getUser=checkUser.user;
+  console.log("from dashboard printing user",getUser)
   return (
     <div className={styles["dashboardContainer"]}>
       <nav className={styles["navbar"]}>
         <div className={styles["leftNavbar"]}>
-          <a href="#">Home</a>
+          <a href="#" onClick={CallHandler("home")}>Home</a>
           <a href="#">Personal</a>
           <a href="#">Business</a>
         </div>
@@ -26,12 +28,10 @@ export default function Dashboard() {
         </div>
       </nav>
       <div className={styles.logo}>
-        <h4>FINANCE WITH </h4>
-        <img src={leafImg} alt="Leaf Logo" />
+       <p></p>
       </div>
-      { /* content part */ }
-
-      { !signin && (<div className={styles["content"]}>
+      { /* -------------- content part  ------------ */ }
+     <div className={styles["content"]}>
         <div className={styles["image"]}>
           <Imagechange />
         </div>
@@ -39,9 +39,15 @@ export default function Dashboard() {
           <Login />
         </div>
        
-      </div>) }
+      </div>
+      { /* --------------------------------------------------------------------- */}
 
-      { signin && <SignupForm />}
+     {/* -------------------- set the content to sign up when auth object is  true ------------------------*/}
+     
+    
+     { /* ------------------------------------------------------------------------- */}
+
+     
     </div>
   );
 }

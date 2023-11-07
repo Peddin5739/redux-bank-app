@@ -1,5 +1,5 @@
 .dashboardContainer {
-  background-color: lightblue;
+  background-color: whitesmoke;
   min-height: 100vh;
 }
 
@@ -10,6 +10,7 @@
   background-color: #333;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Horizontal offset, Vertical offset, Blur radius, Shadow color */
   height: 50px;
+  flex-wrap: wrap;
 }
 
 .leftNavbar,
@@ -29,31 +30,15 @@ a {
 a:hover {
   background-color: #555;
 }
-/* style for logo*/
-.logo {
-  display: flex;
-  align-items: center;
-  background-color: white;
-}
 
-.logo h4 {
-  margin: 0;
-  font-size: 24px; /* Adjust as needed */
-  font-family: "Futura", sans-serif; /* Fallback to a generic sans-serif font if Futura is not available */
-}
-
-.logo img {
-  height: 24px; /* Match with the font-size of h4 or adjust as needed */
-  width: auto;
-  margin-left: 10px; /* Adjust as needed */
-}
 
 .content {
   display: flex;
   align-items: center;
   justify-content: space-around;
   padding: 20px;
-  background-color: #555; /* or any other color that suits your design */
+  background-color: #333; /* or any other color that suits your design */
+  flex-wrap: wrap;
 }
 
 .image {
@@ -61,9 +46,12 @@ a:hover {
   height: 400px;
 
   display: flex;
-  align-items: center;
+ 
   justify-content: center;
   text-align: center;
+}
+.login{
+ 
 }
 
 /* Style for input elements, buttons, etc., within the login component can be added here. */
