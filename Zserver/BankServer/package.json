@@ -1,0 +1,12 @@
+{
+  "name": "BankServer",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mysql": "^2.18.1",
+    "serverless-http": "^3.1.1",
+    "sql": "^0.78.0"
+  }
+}

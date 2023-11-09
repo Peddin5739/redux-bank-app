@@ -31,7 +31,6 @@ a:hover {
   background-color: #555;
 }
 
-
 .content {
   display: flex;
   align-items: center;
@@ -46,12 +45,9 @@ a:hover {
   height: 400px;
 
   display: flex;
- 
+
   justify-content: center;
   text-align: center;
-}
-.login{
- 
 }
 
 /* Style for input elements, buttons, etc., within the login component can be added here. */

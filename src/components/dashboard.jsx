@@ -10,15 +10,17 @@ import { useState } from "react";
 
 export default function Dashboard() {
   // using the login reducer getting the user
-  const checkUser=useSelector(state=>state.auth)
+  const checkUser = useSelector((state) => state.auth);
   // fetching the user  from the authReducer state
-  const getUser=checkUser.user;
-  console.log("from dashboard printing user",getUser)
+  const getUser = checkUser.user;
+  console.log("from dashboard printing user", getUser);
   return (
     <div className={styles["dashboardContainer"]}>
       <nav className={styles["navbar"]}>
         <div className={styles["leftNavbar"]}>
-          <a href="#" onClick={CallHandler("home")}>Home</a>
+          <a href="#" onClick={CallHandler("home")}>
+            Home
+          </a>
           <a href="#">Personal</a>
           <a href="#">Business</a>
         </div>
@@ -28,26 +30,22 @@ export default function Dashboard() {
         </div>
       </nav>
       <div className={styles.logo}>
-       <p></p>
+        <p></p>
       </div>
-      { /* -------------- content part  ------------ */ }
-     <div className={styles["content"]}>
-        <div className={styles["image"]}>
-          <Imagechange />
+      {/* -------------- content part  ------------ */}
+      <div className={styles["content"]}>
+        <div className={`${styles["image"]} ${styles.imageChangeWrapper}`}>
+          {/* <Imagechange /> */}
         </div>
         <div className={styles["login"]}>
           <Login />
         </div>
-       
       </div>
-      { /* --------------------------------------------------------------------- */}
+      {/* --------------------------------------------------------------------- */}
 
-     {/* -------------------- set the content to sign up when auth object is  true ------------------------*/}
-     
-    
-     { /* ------------------------------------------------------------------------- */}
+      {/* -------------------- set the content to sign up when auth object is  true ------------------------*/}
 
-     
+      {/* ------------------------------------------------------------------------- */}
     </div>
   );
 }

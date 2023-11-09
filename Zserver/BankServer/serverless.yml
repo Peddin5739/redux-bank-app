@@ -1,0 +1,21 @@
+org: naveen2628
+app: bankapplicationserver
+service: BankServer
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  region: us-east-2
+  environment:
+    DB_HOST: bankapp.cc7dergrgvwi.us-east-2.rds.amazonaws.com
+    DB_USER: admin
+    DB_PASSWORD: Naveen2628
+    DB_NAME: bankdb
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /{any+}
+          method: "*"
