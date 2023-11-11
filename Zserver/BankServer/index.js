@@ -1,10 +1,16 @@
 const serverless = require("serverless-http");
+const session = require("express-session");
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
-
+const path = require("path");
 app.use(express.json());
+app.use(
+  session({
+    secret: "Thisissessionsecretkey",
+  })
+);
 // Setup CORS options
 const corsOptions = {
   origin: "*", // replace with your specific domain, or use '*' to allow all domains
@@ -30,6 +36,22 @@ app.get("/data", (req, res) => {
   });
 });
 
+app.post("/logincheck", (req, res) => {
+  const sql = "SELECT * FROM users WHERE id = ? and password = ?";
+  // ------------------- querying from the pool-------------------------
+  pool.query(sql, [req.body.id, req.body.password], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (results.length > 0) {
+      return res.json({ Login: true });
+    } else {
+      return res.json({ Login: false });
+    }
+  });
+  // ------------------------ query end --------------------------------------
+});
+
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);
   return res.status(200).json({
@@ -39,17 +61,7 @@ app.get("/", (req, res, next) => {
 });
 
 app.get("/path", (req, res, next) => {
-  return res.status(200).json({
-    message: "Hello from path Naveen!",
-  });
-});
-
-app.post("/logincheck", (req, res) => {
-  const { userName, password } = req.body;
-
-  res
-    .status(200)
-    .json({ message: "Login success", user: userName, pass: password });
+  res.sendFile(path.join(__dirname, "/files/loginsuccess.html"));
 });
 
 app.use((req, res, next) => {

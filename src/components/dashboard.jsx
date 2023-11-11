@@ -1,51 +1,85 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Link, Routes, Route, Navigate } from "react-router-dom";
 import styles from "./stylesfolder/dashboard.module.css";
-import leafImg from "../assets/leafimg.png";
-import Imagechange from "./imagechange";
+import Business from "./Business";
+import Personal from "./Personal";
+import MeetingSchedule from "./MeetingSchedule";
+import CustomerService from "./CustomerService";
+import Home from "./Home";
 import Login from "./Login";
-import CallHandler from "./callHandler";
 
 import { useSelector } from "react-redux";
-import { useState } from "react";
 
 export default function Dashboard() {
-  // using the login reducer getting the user
+  // Redux state and other logic
   const checkUser = useSelector((state) => state.auth);
-  // fetching the user  from the authReducer state
   const getUser = checkUser.user;
-  console.log("from dashboard printing user", getUser);
+  console.log("CHECK USER FROM DASHBOARD", checkUser);
+
+  const ProtectedRoute = ({ children }) => {
+    const isAuthenticated = getUser;
+
+    if (!isAuthenticated) {
+      // Redirect to the specified path if the user is not authenticated
+      return <Navigate to="/login" replace />;
+    }
+
+    // Render children if the user is authenticated
+    return children;
+  };
+
   return (
     <div className={styles["dashboardContainer"]}>
       <nav className={styles["navbar"]}>
         <div className={styles["leftNavbar"]}>
-          <a href="#" onClick={CallHandler("home")}>
-            Home
-          </a>
-          <a href="#">Personal</a>
-          <a href="#">Business</a>
+          <Link to="/home">Home</Link>
+          <Link to="/personal">Personal</Link>
+          <Link to="/business">Business</Link>
         </div>
         <div className={styles["rightNavbar"]}>
-          <a href="#">Schedule a Meeting</a>
-          <a href="#">Customer Service</a>
+          <Link to="/schedule-meeting">Schedule a Meeting</Link>
+          <Link to="/customer-service">Customer Service</Link>
         </div>
       </nav>
+
       <div className={styles.logo}>
-        <p></p>
+        <p></p> {/* Assuming your logo or branding goes here */}
       </div>
-      {/* -------------- content part  ------------ */}
+
+      {/* Content Area for Routing */}
       <div className={styles["content"]}>
-        <div className={`${styles["image"]} ${styles.imageChangeWrapper}`}>
-          {/* <Imagechange /> */}
-        </div>
-        <div className={styles["login"]}>
-          <Login />
-        </div>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/personal"
+            element={
+              <ProtectedRoute>
+                <Personal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/business"
+            element={
+              <ProtectedRoute>
+                <Business />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/schedule-meeting" element={<MeetingSchedule />} />
+          <Route path="/customer-service" element={<CustomerService />} />
+          {/* Add other routes as needed */}
+        </Routes>
       </div>
-      {/* --------------------------------------------------------------------- */}
-
-      {/* -------------------- set the content to sign up when auth object is  true ------------------------*/}
-
-      {/* ------------------------------------------------------------------------- */}
     </div>
   );
 }

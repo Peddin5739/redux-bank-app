@@ -1,29 +1,12 @@
-export const loginRequest = (userName, password) => {
-  if (userName === "naveen" && password === "Naveen@2628") {
-    const data = { userName, password };
-    fetch(
-      " https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/logincheck",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log("error from logincheck", error);
-      });
-    return loginSuccess(userName);
+// ---------------------------------------- Login Validation ------------------------------------
+export const loginRequest = (id, islogin) => {
+  if (islogin) {
+    return loginSuccess(id);
   } else {
-    return loginFailure("Incorrect username or password");
+    return loginFailure("Incorrect userName or Password");
   }
 };
-
+// -------------------------------------  Validation end --------------------------------------------------
 export const loginSuccess = (user) => {
   return { type: "LOGIN_SUCCESS", payload: user };
 };
