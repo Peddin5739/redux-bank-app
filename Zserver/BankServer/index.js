@@ -5,10 +5,17 @@ const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
 const path = require("path");
+
 app.use(express.json());
 app.use(
   session({
     secret: "Thisissessionsecretkey",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      maxAge: 1000 * 60,
+    },
   })
 );
 // Setup CORS options
@@ -44,7 +51,8 @@ app.post("/logincheck", (req, res) => {
       return res.status(500).json({ error: err.message });
     }
     if (results.length > 0) {
-      return res.json({ Login: true });
+      req.session.id = results[0].id;
+      return res.json({ Login: true, userName: req.session.id });
     } else {
       return res.json({ Login: false });
     }
