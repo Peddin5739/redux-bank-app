@@ -2,25 +2,29 @@ import React, { useState } from "react";
 import styles from "./stylesfolder/Login.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { loginRequest } from "../actions/loginActions";
+import { useNavigate } from "react-router-dom";
 export default function Login() {
   const authenticateuser = useSelector((state) => state.auth);
   console.log("Login state Befor-logged in ", authenticateuser);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  let id;
+  let userId;
   let password;
   // ---------------------------- Check the user ---------------------------------------
   const HandelClick = async () => {
-    const data = { id, password };
+    const data = { userId, password };
     try {
       const response = await fetch(
         "https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/logincheck",
         {
           method: "POST",
+
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
+          credentials: "include",
         }
       );
 
@@ -28,9 +32,10 @@ export default function Login() {
       console.log("data from backend", responseData);
 
       if (responseData.Login) {
-        dispatch(loginRequest(id, responseData.Login));
+        dispatch(loginRequest(userId, responseData.Login));
         console.log("state AFTER logged in ", authenticateuser);
         // Note: The state update (authenticateuser) may not be immediately reflected here due to React's asynchronous state updates
+        navigate("/home");
       }
     } catch (error) {
       console.log("error from logincheck", error);
@@ -48,8 +53,8 @@ export default function Login() {
           type="text"
           id="username"
           placeholder="Username"
-          value={id}
-          onChange={(e) => (id = e.target.value)}
+          value={userId}
+          onChange={(e) => (userId = e.target.value)}
         />
       </div>
       <div className={styles.inputelement}>
