@@ -7,6 +7,7 @@ import MeetingSchedule from "./MeetingSchedule";
 import CustomerService from "./CustomerService";
 import Home from "./Home";
 import Login from "./Login";
+import Profile from "./Profile";
 
 import { useSelector } from "react-redux";
 
@@ -39,6 +40,7 @@ export default function Dashboard() {
         <div className={styles["rightNavbar"]}>
           <Link to="/schedule-meeting">Schedule a Meeting</Link>
           <Link to="/customer-service">Customer Service</Link>
+          <Link to="/profile">Profile</Link>
         </div>
       </nav>
 
@@ -67,6 +69,16 @@ export default function Dashboard() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/business"
             element={

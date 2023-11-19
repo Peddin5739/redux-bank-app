@@ -5,7 +5,6 @@ import { loginRequest } from "../actions/loginActions";
 import { useNavigate } from "react-router-dom";
 export default function Login() {
   const authenticateuser = useSelector((state) => state.auth);
-  console.log("Login state Befor-logged in ", authenticateuser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -24,16 +23,14 @@ export default function Login() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
-          credentials: "include",
         }
       );
 
       const responseData = await response.json();
-      console.log("data from backend", responseData);
 
       if (responseData.Login) {
-        dispatch(loginRequest(userId, responseData.Login));
-        console.log("state AFTER logged in ", authenticateuser);
+        dispatch(loginRequest(responseData.userDetails, responseData.Login));
+
         // Note: The state update (authenticateuser) may not be immediately reflected here due to React's asynchronous state updates
         navigate("/home");
       }

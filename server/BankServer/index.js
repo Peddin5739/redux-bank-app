@@ -1,72 +1,40 @@
 const serverless = require("serverless-http");
-const session = require("express-session");
+const { handleLogin, testfun } = require("./controlers/authControler");
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
 const app = express();
-
 app.use(express.json());
+const cookieParser = require("cookie-parser");
+const path = require("path");
 
 //--------------------------------- Setup CORS options -----------------------------------
 const corsOptions = {
-  origin: "http://localhost:3000", // replace with your specific domain, or use '*' to allow all domains
-  methods: "GET", // replace with the HTTP methods you want to allow
-  allowedHeaders: ["Content-Type"], // replace with the headers you want to allow
-  credentials: true,
+  origin: ["http://localhost:3000", "*"], // replace with your specific domain, or use '*' to allow all domains
+  methods: "*", // replace with the HTTP methods you want to allow
+  allowedHeaders: ["*"], // replace with the headers you want to allow
 };
 app.use(cors(corsOptions));
 // --------------------------- End Setting CORS -----------------------------------------
 
-// --------------------------- Creating Session ----------------------------------------
-app.use(
-  session({
-    secret: "Thisissessionsecretkey",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60, // Session expires after 1 minute (1000 milliseconds * 60)
-      httpOnly: true, // Recommended for security (prevents accessing cookie via client-side JS)
-      secure: false, // Set to true if your site is served over HTTPS
-    },
-  })
-);
-// --------------------------- End Session ----------------------------------------
-
-// --------------------------- Creating DB POOL ----------------------------------------
-const pool = mysql.createPool({
-  connectionLimit: 10,
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-});
-
-// --------------------------- End DB Pool ----------------------------------------
-
-// ------------------- querying from the pool-------------------------
-app.post("/logincheck", (req, res) => {
-  const sql = "SELECT * FROM users WHERE id = ? and password = ?";
-  pool.query(sql, [req.body.userId, req.body.password], (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-    if (results.length > 0) {
-      req.session.isAuth = true;
-      return res.json({
-        Login: true,
-        sessionId: req.session.id,
-      });
-    } else {
-      return res.json({ Login: false });
-    }
-  });
+// ------------------- Checking the user -------------------------
+app.post("/logincheck", async (req, res) => {
+  try {
+    // Await the result of handleLogin
+    const result = await handleLogin(req.body.userId, req.body.password);
+    res.json(result); // Send the result as the response
+  } catch (error) {
+    // Handle any errors that might occur
+    res.status(500).json({ error: error.message });
+  }
 });
 // ------------------------ query end --------------------------------------
 
 // --------------------------- Making Session available for Component ----------------------------------------
 app.get("/getcomponent", (req, res) => {
-  if (req.session.isAuth) {
-    return res.json({ valid: true, username: req.session.id });
+  const value = true;
+  if (value) {
+    return res.json({ valid: true });
   } else {
     return res.json({ valid: false });
   }

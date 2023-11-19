@@ -1,10 +1,9 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 export default function Home() {
-  fetch("https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/getcomponent", {
-    method: "GET",
-    credentials: "include",
-  })
-    .then((response) => response.json())
-    .then((data) => console.log("datafrom HOME", data));
+  const userDetails = useSelector((state) => state.auth);
+  console.log(userDetails.id);
 
   return (
     <div>
