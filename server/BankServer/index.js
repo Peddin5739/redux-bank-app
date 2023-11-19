@@ -1,5 +1,6 @@
 const serverless = require("serverless-http");
 const { handleLogin, testfun } = require("./controlers/authControler");
+const { handleAccount } = require("./controlers/accountControler");
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
@@ -31,12 +32,15 @@ app.post("/logincheck", async (req, res) => {
 // ------------------------ query end --------------------------------------
 
 // --------------------------- Making Session available for Component ----------------------------------------
-app.get("/getcomponent", (req, res) => {
-  const value = true;
-  if (value) {
-    return res.json({ valid: true });
-  } else {
-    return res.json({ valid: false });
+app.post("/getAccountDetails", async (req, res) => {
+  const UserId = req.body.UserId;
+  try {
+    // Await the result of handleLogin
+    const result = await handleAccount(UserId);
+    res.status(200).send({ result: result }); // Send the result as the response
+  } catch (error) {
+    // Handle any errors that might occur
+    res.status(500).send({ errormsg: error });
   }
 });
 
