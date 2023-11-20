@@ -8,6 +8,7 @@ import CustomerService from "./CustomerService";
 import Home from "./Home";
 import Login from "./Login";
 import Profile from "./Profile";
+import FinantialGoals from "./FinantialGoals";
 
 import { useSelector } from "react-redux";
 
@@ -66,6 +67,14 @@ export default function Dashboard() {
             element={
               <ProtectedRoute>
                 <Personal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/setFinantialGoal"
+            element={
+              <ProtectedRoute>
+                <FinantialGoals />
               </ProtectedRoute>
             }
           />

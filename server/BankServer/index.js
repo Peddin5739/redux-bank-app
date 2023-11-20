@@ -1,5 +1,5 @@
 const serverless = require("serverless-http");
-const { handleLogin, testfun } = require("./controlers/authControler");
+const { handleLogin } = require("./controlers/authControler");
 const { handleAccount } = require("./controlers/accountControler");
 const express = require("express");
 const cors = require("cors");
@@ -8,6 +8,7 @@ const app = express();
 app.use(express.json());
 const cookieParser = require("cookie-parser");
 const path = require("path");
+const { handleGoals } = require("./controlers/finantialGoalsControler");
 
 //--------------------------------- Setup CORS options -----------------------------------
 const corsOptions = {
@@ -31,7 +32,7 @@ app.post("/logincheck", async (req, res) => {
 });
 // ------------------------ query end --------------------------------------
 
-// --------------------------- Making Session available for Component ----------------------------------------
+// --------------------------- getting account details----------------------------------------
 app.post("/getAccountDetails", async (req, res) => {
   const UserId = req.body.UserId;
   try {
@@ -44,7 +45,32 @@ app.post("/getAccountDetails", async (req, res) => {
   }
 });
 
-// ------------------------------ End Component Session ----------------------------------------
+// ------------------------------ End Getting account details----------------------------------------
+
+// -------------------------------- Goals ----------------------
+
+// POST route to handle goals
+app.post("/handle-goals", (req, res) => {
+  const formData = req.body;
+
+  handleGoals(formData)
+    .then((result) => {
+      // Send a successful response back to the client
+      res.status(200).json({
+        message: "Goal handled successfully",
+        data: result,
+      });
+    })
+    .catch((error) => {
+      // Send an error response back to the client
+      res.status(500).json({
+        message: "Error handling goal",
+        error: error,
+      });
+    });
+});
+
+// -------------------------- End Goals--------------------------
 
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);

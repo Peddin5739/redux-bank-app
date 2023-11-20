@@ -1,8 +1,119 @@
-.greeting p {
-  color: aliceblue;
-  display: flex;
+/* Home.module.css */
+
+.greeting {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .greeting h2 {
-  color: aliceblue;
-  display: flex;
+  color: #2a2a2a;
+  font-size: 1.6em;
+  margin-bottom: 10px;
+}
+
+.greeting p {
+  font-size: 1.2em;
+  line-height: 1.5;
+  color: #555;
+}
+
+.accountDetails {
+  background-color: #fff;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.accountDetails h1 {
+  color: #1a1a1a;
+  font-size: 1.4em;
+  margin-bottom: 15px;
+}
+
+.accountDetails p {
+  font-size: 1.1em;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.accountDetails strong {
+  color: #333;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Media Queries for Tablet Screens */
+@media screen and (max-width: 768px) {
+  .greeting {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .greeting h2 {
+    font-size: 1.4em;
+  }
+
+  .greeting p,
+  .accountDetails p {
+    font-size: 1em;
+  }
+
+  .accountDetails {
+    padding: 15px;
+  }
+
+  button {
+    padding: 8px 15px;
+    font-size: 1em;
+  }
+}
+
+/* Media Queries for Mobile Screens */
+@media screen and (max-width: 480px) {
+  .greeting {
+    margin: 5px;
+    padding: 10px;
+  }
+
+  .greeting h2 {
+    font-size: 1.2em;
+  }
+
+  .greeting p,
+  .accountDetails p {
+    font-size: 0.9em;
+  }
+
+  .accountDetails {
+    padding: 10px;
+  }
+
+  button {
+    padding: 6px 10px;
+    font-size: 0.9em;
+  }
 }

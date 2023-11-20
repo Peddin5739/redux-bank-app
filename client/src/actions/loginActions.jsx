@@ -1,7 +1,7 @@
 // ---------------------------------------- Login Validation ------------------------------------
-export const loginRequest = (id, islogin) => {
+export const loginRequest = (userdetails, islogin) => {
   if (islogin) {
-    return loginSuccess(id);
+    return loginSuccess(userdetails);
   } else {
     return loginFailure("Incorrect userName or Password");
   }
