@@ -9,6 +9,10 @@ app.use(express.json());
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const { handleGoals } = require("./controlers/finantialGoalsControler");
+const {
+  handleRegister,
+  createAccount,
+} = require("./controlers/registerControler");
 
 //--------------------------------- Setup CORS options -----------------------------------
 const corsOptions = {
@@ -46,6 +50,37 @@ app.post("/getAccountDetails", async (req, res) => {
 });
 
 // ------------------------------ End Getting account details----------------------------------------
+
+//------------------------------ Register User --------------------------------------------------
+
+app.post("/register-user", (req, res) => {
+  const formData = req.body;
+
+  handleRegister(formData)
+    .then((registerResult) => {
+      // Registration successful, now proceed to create an account
+      return createAccount(formData).then((accountResult) => {
+        // Both registration and account creation are successful
+        return { registerResult, accountResult };
+      });
+    })
+    .then((results) => {
+      // Send a successful response back to the client
+      res.status(200).json({
+        message: "Registered successfully and account created",
+        data: results,
+      });
+    })
+    .catch((error) => {
+      // Send an error response back to the client
+      res.status(500).json({
+        message: "Error during registration or account creation",
+        error: error.message,
+      });
+    });
+});
+
+//----------------------------- End Register User ---------------------------------------------
 
 // -------------------------------- Goals ----------------------
 

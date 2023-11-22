@@ -39,6 +39,10 @@ export default function Login() {
     }
   };
 
+  const HandelRegister = () => {
+    navigate("/register");
+  };
+
   // ---------------------------------   end-Check-uSER ---------------------------------------
 
   return (
@@ -68,7 +72,7 @@ export default function Login() {
       </button>
       <div className={styles.anchor}>
         <a src="#">Forgot username/password? </a> <br></br>
-        <a src="#"> Not enrolled? Sign up now.</a>
+        <a onClick={HandelRegister}> Not enrolled? Sign up now.</a>
       </div>
     </div>
   );

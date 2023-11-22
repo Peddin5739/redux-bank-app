@@ -9,6 +9,7 @@ import Home from "./Home";
 import Login from "./Login";
 import Profile from "./Profile";
 import FinantialGoals from "./FinantialGoals";
+import Register from "./Register";
 
 import { useSelector } from "react-redux";
 
@@ -54,6 +55,7 @@ export default function Dashboard() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route
             path="/home"
             element={
