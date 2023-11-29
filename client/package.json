@@ -2,6 +2,7 @@
   "name": "redux-bank-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://dcm.uhcl.edu/capf23g11/login",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",

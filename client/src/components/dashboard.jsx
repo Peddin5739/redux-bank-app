@@ -10,6 +10,8 @@ import Login from "./Login";
 import Profile from "./Profile";
 import FinantialGoals from "./FinantialGoals";
 import Register from "./Register";
+import DepositeTowardsGoal from "./DepositeTowardsGoal";
+import Transfer from "./Transfer";
 
 import { useSelector } from "react-redux";
 
@@ -64,11 +66,28 @@ export default function Dashboard() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="/goaldeposite"
+            element={
+              <ProtectedRoute>
+                <DepositeTowardsGoal />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/personal"
             element={
               <ProtectedRoute>
                 <Personal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transfer"
+            element={
+              <ProtectedRoute>
+                <Transfer />
               </ProtectedRoute>
             }
           />

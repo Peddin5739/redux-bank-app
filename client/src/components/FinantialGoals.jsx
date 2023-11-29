@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import styles from "./stylesfolder/finantialGoals.module.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function FinancialGoals() {
+  const navigate = useNavigate();
   const userDetails = useSelector((state) => state.auth);
   const UserId = userDetails.user.UserID;
   console.log("from Goals", UserId);
+
   // State to store form data
   const [formData, setFormData] = useState({
     depositAmount: "",
@@ -32,36 +35,47 @@ function FinancialGoals() {
   const HandleSubmit = (event) => {
     event.preventDefault();
 
-    // Format the destination date
-    const formattedDate = new Date(formData.destinationDate)
-      .toISOString()
-      .split("T")[0];
+    try {
+      // Only format the date if it's a valid, non-empty string
+      const formattedDate = formData.destinationDate
+        ? new Date(formData.destinationDate).toISOString().split("T")[0]
+        : "";
 
-    // Create updated form data with the formatted date
-    const updatedFormData = {
-      ...formData,
-      destinationDate: formattedDate,
-    };
+      // Create updated form data with the formatted date
+      const updatedFormData = {
+        ...formData,
+        destinationDate: formattedDate,
+      };
 
-    // Fetch request with the updated form data
-    fetch(
-      "https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/handle-goals",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedFormData),
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => console.log("Success:", data))
-      .catch((error) => console.error("Error:", error));
+      // Fetch request with the updated form data
+      fetch(
+        "https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/handle-goals",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedFormData),
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          navigate("/personal");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          navigate("/personal");
+        });
+    } catch (error) {
+      console.error("Date Formatting Error:", error);
+      // Handle the error appropriately
+    }
   };
 
   return (
     <form onSubmit={HandleSubmit} className={styles["financial-goals-form"]}>
-      {/* Input for Deposit Amount */}
+      {/* Various Input Fields */}
       <div>
         <label htmlFor="depositAmount">Deposit Amount:</label>
         <input
@@ -72,7 +86,6 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Destination Date */}
       <div>
         <label htmlFor="destinationDate">Destination Date:</label>
         <input
@@ -83,7 +96,6 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Monthly Contribution */}
       <div>
         <label htmlFor="monthlyContribution">Monthly Contribution:</label>
         <input
@@ -94,7 +106,6 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Purpose */}
       <div>
         <label htmlFor="purpose">Purpose:</label>
         <input
@@ -105,7 +116,6 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Current Savings */}
       <div>
         <label htmlFor="currentSavings">Current Savings:</label>
         <input
@@ -116,7 +126,6 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Income Source */}
       <div>
         <label htmlFor="incomeSource">Income Source:</label>
         <input
@@ -127,7 +136,6 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Regular Expenses */}
       <div>
         <label htmlFor="regularExpenses">Regular Expenses:</label>
         <input
@@ -138,14 +146,13 @@ function FinancialGoals() {
           onChange={handleChange}
         />
       </div>
-      {/* Input for Goal Priority */}
       <div>
         <label htmlFor="goalPriority">Goal Priority:</label>
         <input
           type="text"
           id="goalPriority"
           name="goalPriority"
-          placeholder="Hig, Medium, Low"
+          placeholder="High, Medium, Low"
           value={formData.goalPriority}
           onChange={handleChange}
         />

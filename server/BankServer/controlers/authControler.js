@@ -31,8 +31,4 @@ const handleLogin = async (userId, password) => {
   });
 };
 
-const testfun = (name) => {
-  console.log("myname is", name);
-};
-
-module.exports = { handleLogin, testfun };
+module.exports = { handleLogin };

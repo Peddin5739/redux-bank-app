@@ -1,6 +1,7 @@
 const serverless = require("serverless-http");
 const { handleLogin } = require("./controlers/authControler");
 const { handleAccount } = require("./controlers/accountControler");
+const { sendmoney } = require("./controlers/handelTransactions");
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
@@ -8,7 +9,12 @@ const app = express();
 app.use(express.json());
 const cookieParser = require("cookie-parser");
 const path = require("path");
-const { handleGoals } = require("./controlers/finantialGoalsControler");
+
+const {
+  handleGoals,
+  getGoals,
+  depositeTowardsGoal,
+} = require("./controlers/finantialGoalsControler");
 const {
   handleRegister,
   createAccount,
@@ -16,10 +22,11 @@ const {
 
 //--------------------------------- Setup CORS options -----------------------------------
 const corsOptions = {
-  origin: ["http://localhost:3000", "*"], // replace with your specific domain, or use '*' to allow all domains
-  methods: "*", // replace with the HTTP methods you want to allow
-  allowedHeaders: ["*"], // replace with the headers you want to allow
+  origin: "*", // Allows all origins
+  methods: "*", // Allows all HTTP methods
+  allowedHeaders: "*", // Allows all headers
 };
+
 app.use(cors(corsOptions));
 // --------------------------- End Setting CORS -----------------------------------------
 
@@ -106,6 +113,51 @@ app.post("/handle-goals", (req, res) => {
 });
 
 // -------------------------- End Goals--------------------------
+
+//------------------------------- Getting Goals -----------------------------------
+// POST route to handle getting financial goals
+app.post("/get-goals", (req, res) => {
+  const UserId = req.body.UserId; // Extract UserId from request body
+
+  getGoals(UserId)
+    .then((data) => {
+      // Sending back the queried data as a JSON response
+      res.status(200).json(data);
+    })
+    .catch((error) => {
+      // Handling errors, such as database connection issues
+      res.status(500).json({ success: false, error: error.message });
+    });
+});
+
+//-------------------------End Getting Goals -----------------------------------
+
+//---------------------- Goals Deposite ----------------------------------
+app.post("/deposite-goals", (req, res) => {
+  const submitdata = req.body;
+
+  depositeTowardsGoal(submitdata)
+    .then((data) => {
+      res.status(200).json({ success: true });
+    })
+    .catch((error) => {
+      res.status(500).json({ success: false, error: error.message });
+    });
+});
+
+// --------------------- End Goals Deposite -------------------------------------
+// ---------------- Transfer Money -----------------------------
+app.post("/sendmoney", async (req, res) => {
+  try {
+    const formData = req.body;
+    await sendmoney(formData);
+    res.status(200).send("Transaction completed successfully.");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("An error occurred in the transaction process.");
+  }
+});
+//--------------- End ----------------------------------
 
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);

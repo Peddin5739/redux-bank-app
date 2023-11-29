@@ -1,0 +1,116 @@
+/* Resetting the margin and padding for the whole document */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Styles for the personal container */
+.personalcontainer {
+  font-family: "Times New Roman", Times, serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns children to the left */
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  color: #ddd;
+}
+
+.personalcontainer h2 {
+  color: #fff; /* White color for the heading */
+  margin-top: 0;
+  text-align: left; /* Aligns the heading text to the left */
+}
+
+/* Styles for the goals container inside the personal container */
+.goalscontainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Aligns items to the start (left) */
+  gap: 20px; /* Space between each financial goal */
+  width: 100%; /* Ensures the container takes full width */
+}
+
+/* Styles for individual financial goals */
+.financialGoal {
+  flex: 0 0 300px; /* Fixed width for each goal */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff; /* White background for each goal */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  margin-bottom: 20px; /* Space between goals vertically */
+}
+
+.financialGoal h3 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.financialGoal p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Other existing styles... */
+
+/* Media Queries for Tablet Screens */
+@media screen and (max-width: 768px) {
+  .personalcontainer {
+    padding: 15px; /* Slightly reduce padding */
+  }
+
+  .personalcontainer h2 {
+    font-size: 1.4em; /* Adjust the font size for smaller screens */
+  }
+
+  .goalscontainer {
+    gap: 15px; /* Reduce the space between goals */
+  }
+
+  .financialGoal {
+    flex: 0 0 250px; /* Slightly reduce the width of each goal */
+  }
+
+  .financialGoal h3 {
+    font-size: 1.2em; /* Adjust the heading font size within goals */
+  }
+
+  .financialGoal p {
+    font-size: 1em; /* Adjust the paragraph font size within goals */
+  }
+}
+
+/* Media Queries for Mobile Screens */
+@media screen and (max-width: 480px) {
+  .personalcontainer {
+    padding: 10px; /* Further reduce padding */
+  }
+
+  .personalcontainer h2 {
+    font-size: 1.2em; /* Smaller font size for h2 headings */
+  }
+
+  .goalscontainer {
+    gap: 10px; /* Further reduce the space between goals */
+  }
+
+  .financialGoal {
+    flex: 0 0 100%; /* Make each goal take full width on small screens */
+    margin-bottom: 15px; /* Adjust margin */
+  }
+
+  .financialGoal h3 {
+    font-size: 1.1em; /* Smaller heading size within goals */
+  }
+
+  .financialGoal p {
+    font-size: 0.9em; /* Smaller paragraph size within goals */
+  }
+}
+
+/* End of existing styles... */

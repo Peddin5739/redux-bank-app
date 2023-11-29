@@ -72,7 +72,7 @@ export default function Home() {
         <div className={styles.accountDetails}>
           <h1>Your Account Details</h1>
           <p>
-            <strong>Account ID:</strong> {account.AccountID}
+            <strong>Account Number:</strong> {account.AccountID}
           </p>
           <p>
             <strong>User ID:</strong> {account.UserID}
