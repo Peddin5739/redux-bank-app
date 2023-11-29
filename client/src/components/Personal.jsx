@@ -6,6 +6,7 @@ export default function Personal() {
   const userDetails = useSelector((state) => state.auth);
   const UserId = userDetails.user.UserID;
   const [personalData, setPersonalData] = useState([]);
+  const [Transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
   function DepositeToGoal() {
     navigate("/goaldeposite");
@@ -33,6 +34,34 @@ export default function Personal() {
       })
       .then((data) => {
         setPersonalData(data.results);
+      })
+      .catch((error) => {
+        console.error("Fetch Error:", error);
+      });
+  }, [UserId]);
+  // Fetching transactions
+  useEffect(() => {
+    fetch(
+      "https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/getTransactions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: UserId }), // Note the lowercase 'u' in userId
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            "Network response was not ok: " + response.statusText
+          );
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setTransactions(data);
+        console.log(Transactions);
       })
       .catch((error) => {
         console.error("Fetch Error:", error);
@@ -69,6 +98,34 @@ export default function Personal() {
       <button onClick={GoToTransfer}>Transfer</button>
 
       <h3>Your Transactions</h3>
+      <div className={styles.transactionsContainer}>
+        <table>
+          <thead>
+            <tr>
+              <th>Transaction ID</th>
+              <th>Account ID</th>
+
+              <th>Amount</th>
+              <th>Transaction Date</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Transactions.map((transaction) => (
+              <tr key={transaction.TransactionID}>
+                <td>{transaction.TransactionID}</td>
+                <td>{transaction.AccountID}</td>
+
+                <td>${transaction.Amount}</td>
+                <td>
+                  {new Date(transaction.TransactionDate).toLocaleString()}
+                </td>
+                <td>{transaction.Description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

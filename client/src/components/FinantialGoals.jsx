@@ -74,92 +74,94 @@ function FinancialGoals() {
   };
 
   return (
-    <form onSubmit={HandleSubmit} className={styles["financial-goals-form"]}>
-      {/* Various Input Fields */}
-      <div>
-        <label htmlFor="depositAmount">Deposit Amount:</label>
-        <input
-          type="number"
-          id="depositAmount"
-          name="depositAmount"
-          value={formData.depositAmount}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="destinationDate">Destination Date:</label>
-        <input
-          type="date"
-          id="destinationDate"
-          name="destinationDate"
-          value={formData.destinationDate}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="monthlyContribution">Monthly Contribution:</label>
-        <input
-          type="number"
-          id="monthlyContribution"
-          name="monthlyContribution"
-          value={formData.monthlyContribution}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="purpose">Purpose:</label>
-        <input
-          type="text"
-          id="purpose"
-          name="purpose"
-          value={formData.purpose}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="currentSavings">Current Savings:</label>
-        <input
-          type="number"
-          id="currentSavings"
-          name="currentSavings"
-          value={formData.currentSavings}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="incomeSource">Income Source:</label>
-        <input
-          type="text"
-          id="incomeSource"
-          name="incomeSource"
-          value={formData.incomeSource}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="regularExpenses">Regular Expenses:</label>
-        <input
-          type="number"
-          id="regularExpenses"
-          name="regularExpenses"
-          value={formData.regularExpenses}
-          onChange={handleChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="goalPriority">Goal Priority:</label>
-        <input
-          type="text"
-          id="goalPriority"
-          name="goalPriority"
-          placeholder="High, Medium, Low"
-          value={formData.goalPriority}
-          onChange={handleChange}
-        />
-      </div>
-      {/* Submit Button */}
-      <button type="submit">Submit Goal</button>
-    </form>
+    <div className={styles["financial-goals-container"]}>
+      <form onSubmit={HandleSubmit} className={styles["financial-goals-form"]}>
+        {/* Various Input Fields */}
+        <div>
+          <label htmlFor="depositAmount">Deposit Amount:</label>
+          <input
+            type="number"
+            id="depositAmount"
+            name="depositAmount"
+            value={formData.depositAmount}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="destinationDate">Destination Date:</label>
+          <input
+            type="date"
+            id="destinationDate"
+            name="destinationDate"
+            value={formData.destinationDate}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="monthlyContribution">Monthly Contribution:</label>
+          <input
+            type="number"
+            id="monthlyContribution"
+            name="monthlyContribution"
+            value={formData.monthlyContribution}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="purpose">Purpose:</label>
+          <input
+            type="text"
+            id="purpose"
+            name="purpose"
+            value={formData.purpose}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="currentSavings">Current Savings:</label>
+          <input
+            type="number"
+            id="currentSavings"
+            name="currentSavings"
+            value={formData.currentSavings}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="incomeSource">Income Source:</label>
+          <input
+            type="text"
+            id="incomeSource"
+            name="incomeSource"
+            value={formData.incomeSource}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="regularExpenses">Regular Expenses:</label>
+          <input
+            type="number"
+            id="regularExpenses"
+            name="regularExpenses"
+            value={formData.regularExpenses}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="goalPriority">Goal Priority:</label>
+          <input
+            type="text"
+            id="goalPriority"
+            name="goalPriority"
+            placeholder="High, Medium, Low"
+            value={formData.goalPriority}
+            onChange={handleChange}
+          />
+        </div>
+        {/* Submit Button */}
+        <button type="submit">Submit Goal</button>
+      </form>
+    </div>
   );
 }
 

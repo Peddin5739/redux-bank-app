@@ -138,4 +138,34 @@ async function sendmoney(formData) {
   }
 }
 
-module.exports = { sendmoney };
+async function getTransactions(UserId) {
+  return new Promise((resolve, reject) => {
+    // First, get the AccountID associated with the UserId
+    const accountSql = "SELECT AccountID FROM Accounts WHERE UserID = ?";
+    pool.query(accountSql, [UserId], (accountErr, accountResults) => {
+      if (accountErr) {
+        reject({ error: accountErr.message });
+      } else if (accountResults.length === 0) {
+        reject({ message: "Account not found for the given user ID" });
+      } else {
+        const AccountID = accountResults[0].AccountID;
+
+        // Then, fetch transactions for this AccountID
+        const transactionSql = "SELECT * FROM Transactions WHERE AccountID = ?";
+        pool.query(
+          transactionSql,
+          [AccountID],
+          (transactionErr, transactionResults) => {
+            if (transactionErr) {
+              reject({ error: transactionErr.message });
+            } else {
+              resolve(transactionResults);
+            }
+          }
+        );
+      }
+    });
+  });
+}
+
+module.exports = { sendmoney, getTransactions };

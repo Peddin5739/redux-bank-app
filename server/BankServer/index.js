@@ -1,7 +1,10 @@
 const serverless = require("serverless-http");
 const { handleLogin } = require("./controlers/authControler");
 const { handleAccount } = require("./controlers/accountControler");
-const { sendmoney } = require("./controlers/handelTransactions");
+const {
+  sendmoney,
+  getTransactions,
+} = require("./controlers/handelTransactions");
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
@@ -157,7 +160,27 @@ app.post("/sendmoney", async (req, res) => {
     res.status(500).send("An error occurred in the transaction process.");
   }
 });
-//--------------- End ----------------------------------
+//--------------- End Transfer Money----------------------------------
+
+// ------------------------ Get Transactions ----------------------
+
+app.post("/getTransactions", async (req, res) => {
+  try {
+    const userId = req.body.userId;
+    const transactions = await getTransactions(userId);
+    res.status(200).json(transactions);
+  } catch (err) {
+    // Combining the error message and the error object into one response
+    res
+      .status(500)
+      .json({
+        message: "An error occurred while fetching transactions",
+        error: err.message,
+      });
+  }
+});
+
+//------------------------- End get Transactions -----------------
 
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);
