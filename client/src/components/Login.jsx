@@ -74,6 +74,14 @@ export default function Login() {
         <a src="#">Forgot username/password? </a> <br></br>
         <a onClick={HandelRegister}> Not enrolled? Sign up now.</a>
       </div>
+      <h4>
+        This is a Banking Application For Testing the Application <br />
+        You can Use These login credentials
+        <br />
+        UserId: naveenchowdary401@gmail.com
+        <br />
+        Password: naveen123
+      </h4>
     </div>
   );
 }

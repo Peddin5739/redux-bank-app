@@ -1,6 +1,7 @@
 const serverless = require("serverless-http");
 const { handleLogin } = require("./controlers/authControler");
 const { handleAccount } = require("./controlers/accountControler");
+const { insertFixedDeposite } = require("./controlers/handelFDControler.js");
 const {
   sendmoney,
   getTransactions,
@@ -171,16 +172,28 @@ app.post("/getTransactions", async (req, res) => {
     res.status(200).json(transactions);
   } catch (err) {
     // Combining the error message and the error object into one response
-    res
-      .status(500)
-      .json({
-        message: "An error occurred while fetching transactions",
-        error: err.message,
-      });
+    res.status(500).json({
+      message: "An error occurred while fetching transactions",
+      error: err.message,
+    });
   }
 });
 
 //------------------------- End get Transactions -----------------
+
+// ----------------------- insert FDS -------------------
+
+app.post("/insertFDS", async (req, res) => {
+  try {
+    const formdata = req.body.formdata;
+    const insertResults = await insertFixedDeposite(formdata);
+    res.status(200).json({ message: "Money Deposited to Banks FD Scheme" });
+  } catch (err) {
+    res.status(500).json({ message: "error doing the fixed deposite to bank" });
+  }
+});
+
+// ---------------------- End FDS---------------------
 
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);
