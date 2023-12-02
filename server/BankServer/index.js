@@ -1,7 +1,10 @@
 const serverless = require("serverless-http");
 const { handleLogin } = require("./controlers/authControler");
 const { handleAccount } = require("./controlers/accountControler");
-const { insertFixedDeposite } = require("./controlers/handelFDControler.js");
+const {
+  insertFixedDeposite,
+  fetchFDS,
+} = require("./controlers/handelFDControler.js");
 const {
   sendmoney,
   getTransactions,
@@ -194,6 +197,20 @@ app.post("/insertFDS", async (req, res) => {
 });
 
 // ---------------------- End FDS---------------------
+
+// --------------------- fetch FDS ------------------
+
+app.post("/fetchfds", async (req, res) => {
+  try {
+    const userid = req.body.userId;
+    const fetchResults = await fetchFDS(userid);
+    res.status(200).json(fetchResults);
+  } catch (err) {
+    res.status.apply(500).json({ message: "error fetching the deposite" });
+  }
+});
+
+//------------------------------------------------
 
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);

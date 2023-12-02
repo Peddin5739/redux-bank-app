@@ -8,6 +8,10 @@ function Business() {
   const UserId = userDetails.user.UserID;
   console.log("from Busciness", UserId);
 
+  const viewfd = () => {
+    navigate("/DisplayFD");
+  };
+
   // State variables for Fixed Deposit
   const [fdAmount, setFdAmount] = useState("");
   const [fdMaturityDate, setFdMaturityDate] = useState("");
@@ -107,7 +111,10 @@ function Business() {
                 />
               </label>
             </div>
-            <button type="submit">Submit FD</button>
+            <button type="submit">Submit FixedDeposit</button>
+            <button type="submit" onClick={viewfd}>
+              View Your FixedDeposi
+            </button>
           </form>
         </div>
         <div className={styles.section}>
