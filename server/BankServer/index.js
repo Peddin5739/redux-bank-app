@@ -5,6 +5,7 @@ const {
   insertFixedDeposite,
   fetchFDS,
 } = require("./controlers/handelFDControler.js");
+const { inserIntoLoans, fetchLoans } = require("./controlers/handelLoan.js");
 const {
   sendmoney,
   getTransactions,
@@ -207,6 +208,33 @@ app.post("/fetchfds", async (req, res) => {
     res.status(200).json(fetchResults);
   } catch (err) {
     res.status.apply(500).json({ message: "error fetching the deposite" });
+  }
+});
+
+//------------------------------------------------
+// ----------------------- insert Loan -------------------
+
+app.post("/insertLoan", async (req, res) => {
+  try {
+    const formdata = req.body;
+    const insertResults = await inserIntoLoans(formdata);
+    res.status(200).json({ message: "Loan Request Inserted" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "error While insertinf load data to bank" });
+  }
+});
+
+// ---------------------- End LOAN---------------------
+
+app.post("/fetchLoan", async (req, res) => {
+  try {
+    const userid = req.body.userId;
+    const fetchResults = await fetchLoans(userid);
+    res.status(200).json(fetchResults);
+  } catch (err) {
+    res.status.apply(500).json({ message: "error fetching the Loan Details" });
   }
 });
 

@@ -96,6 +96,15 @@ export default function Transfer() {
           Submit
         </button>
       </form>
+      <p>
+        Can Only Transfer The Money To The Customers of the Bank:
+        <br />
+        Try Sending Money To
+        <br />
+        AccountNumber: 2
+        <br />
+        Name: mounika
+      </p>
     </div>
   );
 }

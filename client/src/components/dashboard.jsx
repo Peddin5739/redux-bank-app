@@ -13,6 +13,7 @@ import Register from "./Register";
 import DepositeTowardsGoal from "./DepositeTowardsGoal";
 import Transfer from "./Transfer";
 import DisplayFD from "./DisplayFD";
+import ViewLoans from "./ViewLoans";
 
 import { useSelector } from "react-redux";
 
@@ -81,6 +82,14 @@ export default function Dashboard() {
             element={
               <ProtectedRoute>
                 <Personal />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/viewloans"
+            element={
+              <ProtectedRoute>
+                <ViewLoans />
               </ProtectedRoute>
             }
           />

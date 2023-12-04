@@ -69,4 +69,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# No need to run the backend (handled by me, hosted on AWS Lambda). Just open the client folder in the terminal and hit this command: `npm install` next `npm start`
+# No need to run the backend (handled by me, hosted on AWS Lambda). Just open the client folder in the terminal and hit this command: `npm install` => next `npm start`

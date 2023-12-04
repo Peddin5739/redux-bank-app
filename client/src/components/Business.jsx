@@ -66,8 +66,23 @@ function Business() {
       DueDate: loanDueDate.toLocaleDateString(),
       Status: "Active",
       LoanType: loanType,
+      UserId: UserId,
     };
     console.log("Loan Data:", JSON.stringify(loanFormData));
+    fetch("https://9qdlu2q5gk.execute-api.us-east-2.amazonaws.com/insertLoan", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loanFormData),
+    })
+      .then((data) => {
+        console.log("success");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    navigate("/viewloans");
   };
 
   return (
