@@ -11,6 +11,9 @@ function Business() {
   const viewfd = () => {
     navigate("/DisplayFD");
   };
+  const movetoloans = () => {
+    navigate("/viewloans");
+  };
 
   // State variables for Fixed Deposit
   const [fdAmount, setFdAmount] = useState("");
@@ -173,6 +176,9 @@ function Business() {
               </label>
             </div>
             <button type="submit">Submit Loan Request</button>
+            <button type="submit" onClick={movetoloans}>
+              View Loans you have{" "}
+            </button>
           </form>
         </div>
       </div>

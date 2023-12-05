@@ -101,7 +101,7 @@ export default function Transfer() {
         <br />
         Try Sending Money To
         <br />
-        AccountNumber: 2
+        AccountNumber: 3
         <br />
         Name: mounika
       </p>

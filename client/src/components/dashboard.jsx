@@ -44,7 +44,6 @@ export default function Dashboard() {
           <Link to="/business">Business</Link>
         </div>
         <div className={styles["rightNavbar"]}>
-          <Link to="/schedule-meeting">Schedule a Meeting</Link>
           <Link to="/customer-service">Customer Service</Link>
           <Link to="/profile">Profile</Link>
         </div>

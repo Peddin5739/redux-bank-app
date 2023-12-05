@@ -10,6 +10,9 @@ const {
   sendmoney,
   getTransactions,
 } = require("./controlers/handelTransactions");
+
+const { fetchUserDetails } = require("./controlers/fetchUser.js");
+
 const express = require("express");
 const cors = require("cors");
 const mysql = require("mysql");
@@ -234,11 +237,23 @@ app.post("/fetchLoan", async (req, res) => {
     const fetchResults = await fetchLoans(userid);
     res.status(200).json(fetchResults);
   } catch (err) {
-    res.status.apply(500).json({ message: "error fetching the Loan Details" });
+    res.status(500).json({ message: "error fetching the Loan Details" });
   }
 });
 
 //------------------------------------------------
+
+app.post("/fetchUsers", async (req, res) => {
+  try {
+    const userid = req.body.userId;
+    const userDetails = await fetchUserDetails(userid);
+    res.status(200).json(userDetails);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "error fetching the User details", error: err });
+  }
+});
 
 app.get("/", (req, res, next) => {
   console.log(process.env.MYSQL_HOST);
