@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-Visit to test up and running application: https://dev2070.d1unkfm08trjuj.amplifyapp.com
+Visit, To Test UP AND RUNNING APPLICATION: https://dev4094.dtqc1vrs1yddl.amplifyapp.com
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
