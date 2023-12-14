@@ -1,4 +1,5 @@
 # Getting Started with Create React App
+# No need to run the backend ( Nodejs hosted on AWS Lambda using AWS RDS MYSQL for DB). Just open the client folder in the terminal and hit this command: `npm install` => next `npm start`
 
 Visit, To Test UP AND RUNNING APPLICATION: https://dev4094.dtqc1vrs1yddl.amplifyapp.com
 
@@ -71,4 +72,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-# No need to run the backend (handled by me, hosted on AWS Lambda). Just open the client folder in the terminal and hit this command: `npm install` => next `npm start`
+
